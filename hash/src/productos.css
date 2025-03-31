@@ -1,0 +1,10 @@
+/* Productos page */
+
+a.products-back{
+    display: inline-block;
+    padding: 1rem;
+    background-color: rgb(37, 76, 206);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+  }
