@@ -1,5 +1,5 @@
-import { fetchData, fetchPostId } from "./js/services.js";
-import {  template404, templateCard,  templatePost } from "./js/UI.js";
+import { fetchData } from "./js/services.js";
+import {  template404, templateCard,  templateErrorFetchingData,  templatePost } from "./js/UI.js";
 
 document.addEventListener("DOMContentLoaded", e => {
 const $app = document.querySelector("#app");
@@ -12,24 +12,24 @@ const renderCards = (data) => {
 
 const handleHome = async() => {
   try {
-    const data = await fetchData()
+    const data = await fetchData("https://jsonplaceholder.typicode.com/posts");
     renderCards(data);
   } catch (error) {
-    $app.innerHTML = "<h1>Error obteniendo la data</h1>"
+    $app.innerHTML = templateErrorFetchingData(error.message);
   }
 }
 
 const handlePost = async (idPost) => {
 
     try {
-      const post = await fetchPostId(idPost)
+      const post = await fetchData("https://jsonplaceholder.typicode.com/posts/" + idPost)
       if(post && post.title !== undefined){
         $app.innerHTML = templatePost(post);
       }else{
         $app.innerHTML = template404();
       }      
     } catch (error) {
-      $app.innerHTML = "<h1>Error obteniendo los datos</h1>"
+      $app.innerHTML = templateErrorFetchingData(error.message);
     }
 
     return;
@@ -38,10 +38,11 @@ const handlePost = async (idPost) => {
 const handleProducts = async () => {
   try {
     const module = await import("./pages/productos.js")
-    const {html} = module.default();
+    const {html} = module.Productos();
     $app.innerHTML = html;
+    if(module.js) module.js();
   } catch (error) {
-    $app.innerHTML = "<h1>Error fetching data of products</h1>";
+    $app.innerHTML = templateErrorFetchingData();
   }
 }
 

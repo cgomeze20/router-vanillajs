@@ -8,3 +8,10 @@ a.products-back{
     text-decoration: none;
     border-radius: 5px;
   }
+
+#btn{
+  padding: 1rem;
+  outline: none;
+  border: none;
+  background-color: rgb(171, 230, 123);
+}

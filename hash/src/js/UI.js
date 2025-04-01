@@ -29,3 +29,7 @@ export const template404 = () => `
   <a href="#/">Volver a la página principal</a>
 </div>
 `;
+
+export const templateErrorFetchingData = (msg="Error fetching data of products") => {
+  return `<h1>${msg}</h1>`;
+}

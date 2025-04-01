@@ -1,18 +1,10 @@
-export const fetchData = async () => {
+export const fetchData = async (url) => {
     try {
-      const response = await fetch("https://jsonplaceholder.typicode.com/posts")
+      const response = await fetch(url);
+      if(!response.ok) throw new Error("Error fetching data.");
       const data = await response.json();
-      return data  
-    } catch (error) {
-      console.log(error);
-    }
-  }
+      return data
 
- export  const fetchPostId = async (id) => {
-    try {
-      const response = await fetch("https://jsonplaceholder.typicode.com/posts/" + id)
-      const data = await response.json();
-      return data  
     } catch (error) {
       console.log(error);
     }
